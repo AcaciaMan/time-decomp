@@ -1,6 +1,7 @@
 # add class DecompositionSingleton
 import pandas as pd
 import statsmodels.api as sm
+import matplotlib.pyplot as plt
 
 class DecompositionSingleton:
     _instance = None
@@ -16,6 +17,7 @@ class DecompositionSingleton:
             self.features = []
             self.s = {}
             self.decompose_params = {}
+            plt.rcParams['figure.figsize'] = [12, 9]
             self.initialized = True
 
     def m_decompose(self):
@@ -25,3 +27,18 @@ class DecompositionSingleton:
             self.s[c] = sm.tsa.seasonal_decompose(self.df.loc[:,c], **self.decompose_params)
 
 
+    def get_month_keew(self, x):
+        if x.day <= 7:
+            return 1
+        if x.day >= 8 and x.day <= 15:
+            return 2
+        if x.month == 2:
+            if x.day >= 23:
+                return 4
+            else:
+                return 3
+        else:
+            if x.day >= 24:
+                return 4
+            else:
+                return 3        
