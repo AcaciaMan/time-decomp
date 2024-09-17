@@ -17,7 +17,8 @@ class DecompositionSingleton:
             self.features = []
             self.s = {}
             self.decompose_params = {}
-            plt.rcParams['figure.figsize'] = [12, 9]
+            self.plot_params = {}
+            plt.rcParams['figure.figsize'] = [19.20,10.80]
             self.initialized = True
 
     def m_decompose(self):
@@ -42,3 +43,33 @@ class DecompositionSingleton:
                 return 4
             else:
                 return 3        
+
+    def get_colors_array(self, n):
+        # get n colors from a color map
+        return plt.cm.get_cmap('tab20', n).colors
+    
+    def plot_decomposition(self, feature,  range_column, range_data, data_column, title, xlabel, ylabel):
+        # plot the decomposition of a feature for a data range of range column for a data column
+        plt.figure()
+        # get colors for the range data
+        colors = self.get_colors_array(len(range_data))
+
+        # plot the first data of the range
+        for i, n in enumerate(range_data):
+            if i == 0:
+                # get mean of the trend
+                n_trend = self.s[feature].trend[self.df[range_column] == n].mean()
+                plt.plot(self.df[self.df[range_column] == n][data_column], self.s[feature].seasonal[self.df[range_column] == n]+n_trend, color='red', linewidth=2, label='Seasonality')
+            plt.plot(self.df[self.df[range_column] == n][data_column], self.s[feature].trend[self.df[range_column] == n], color=colors[i], label=str(n))
+
+        font1 = {'family':'serif','color':'blue','size':32}
+        font2 = {'family':'serif','color':'darkred','size':24}  
+        
+        plt.title(title, fontdict = font1, loc = 'left')
+        plt.xlabel(xlabel, fontdict = font2)
+        plt.ylabel(ylabel, fontdict = font2)  
+
+        plt.legend(loc='best', ncol=3, fancybox=True, shadow=True, fontsize="24" )
+
+        plt.xticks(fontsize = 20)
+        plt.yticks(fontsize = 20)
