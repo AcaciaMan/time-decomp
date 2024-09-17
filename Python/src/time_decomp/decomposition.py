@@ -48,7 +48,13 @@ class DecompositionSingleton:
         # get n colors from a color map
         return plt.cm.get_cmap('tab20', n).colors
     
-    def plot_decomposition(self, feature,  range_column, range_data, data_column, title, xlabel, ylabel):
+    def plot_decomposition(self, feature,  range_column, range_data, data_column, title, xlabel = None, ylabel = None):
+
+        if xlabel is None:
+            xlabel = data_column
+        if ylabel is None:
+            ylabel = feature
+
         # plot the decomposition of a feature for a data range of range column for a data column
         plt.figure()
         # get colors for the range data
