@@ -6,9 +6,6 @@ import numpy as np
 import matplotlib.pyplot as plt
 from src.time_decomp.decomposition import DecompositionSingleton
 
-# Configure logging
-print("Configuring logging")
-
 class TestKeewDecomposition(unittest.TestCase):
     def setUp(self):
         self.decomp = DecompositionSingleton()
@@ -32,20 +29,7 @@ class TestKeewDecomposition(unittest.TestCase):
         self.decomp.df = df.groupby(['Year', 'Keew']).last().reset_index()
         
         self.decomp.features = ['A', 'B']
-        self.decomp.decompose_params = {'model': 'additive', 'period':48, 'extrapolate_trend':'freq'}
-        self.decomp.plot_params = {'title': 'Decomposition of feature', 'xlabel': 'Time', 'ylabel': 'Feature'}
-
-    def test_get_month_keew(self):
-        self.assertEqual(self.decomp.get_month_keew(pd.Timestamp('2020-01-01')), 1)
-        self.assertEqual(self.decomp.get_month_keew(pd.Timestamp('2020-01-08')), 2)
-        self.assertEqual(self.decomp.get_month_keew(pd.Timestamp('2020-01-16')), 3)
-        self.assertEqual(self.decomp.get_month_keew(pd.Timestamp('2020-01-24')), 4)
-        self.assertEqual(self.decomp.get_month_keew(pd.Timestamp('2020-01-31')), 4)
-        self.assertEqual(self.decomp.get_month_keew(pd.Timestamp('2020-02-01')), 1)
-        self.assertEqual(self.decomp.get_month_keew(pd.Timestamp('2020-02-08')), 2)
-        self.assertEqual(self.decomp.get_month_keew(pd.Timestamp('2020-02-16')), 3)
-        self.assertEqual(self.decomp.get_month_keew(pd.Timestamp('2020-02-24')), 4)
-        self.assertEqual(self.decomp.get_month_keew(pd.Timestamp('2020-02-29')), 4)
+        self.decomp.decompose_params = {'model': 'additive', 'period':48, 'extrapolate_trend':'freq'}        
 
     def test_plot_decomposition(self):
 
@@ -61,6 +45,18 @@ class TestKeewDecomposition(unittest.TestCase):
         self.decomp.plot_decomposition('A', 'Year', range(2021,2025), 'Keew', 'A keew')
         plt.show()
 
+
+    def test_get_month_keew(self):
+        self.assertEqual(self.decomp.get_month_keew(pd.Timestamp('2020-01-01')), 1)
+        self.assertEqual(self.decomp.get_month_keew(pd.Timestamp('2020-01-08')), 2)
+        self.assertEqual(self.decomp.get_month_keew(pd.Timestamp('2020-01-16')), 3)
+        self.assertEqual(self.decomp.get_month_keew(pd.Timestamp('2020-01-24')), 4)
+        self.assertEqual(self.decomp.get_month_keew(pd.Timestamp('2020-01-31')), 4)
+        self.assertEqual(self.decomp.get_month_keew(pd.Timestamp('2020-02-01')), 1)
+        self.assertEqual(self.decomp.get_month_keew(pd.Timestamp('2020-02-08')), 2)
+        self.assertEqual(self.decomp.get_month_keew(pd.Timestamp('2020-02-16')), 3)
+        self.assertEqual(self.decomp.get_month_keew(pd.Timestamp('2020-02-24')), 4)
+        self.assertEqual(self.decomp.get_month_keew(pd.Timestamp('2020-02-29')), 4)
 
 
 if __name__ == '__main__':
