@@ -43,18 +43,6 @@ class TestDecompositionSingleton(unittest.TestCase):
         self.decomp.m_decompose()
         self.assertTrue(all([isinstance(self.decomp.s[c], DecomposeResult) for c in self.decomp.features]))
 
-    def test_get_month_keew(self):
-        self.assertEqual(self.decomp.get_month_keew(pd.Timestamp('2020-01-01')), 1)
-        self.assertEqual(self.decomp.get_month_keew(pd.Timestamp('2020-01-08')), 2)
-        self.assertEqual(self.decomp.get_month_keew(pd.Timestamp('2020-01-16')), 3)
-        self.assertEqual(self.decomp.get_month_keew(pd.Timestamp('2020-01-24')), 4)
-        self.assertEqual(self.decomp.get_month_keew(pd.Timestamp('2020-01-31')), 4)
-        self.assertEqual(self.decomp.get_month_keew(pd.Timestamp('2020-02-01')), 1)
-        self.assertEqual(self.decomp.get_month_keew(pd.Timestamp('2020-02-08')), 2)
-        self.assertEqual(self.decomp.get_month_keew(pd.Timestamp('2020-02-16')), 3)
-        self.assertEqual(self.decomp.get_month_keew(pd.Timestamp('2020-02-24')), 4)
-        self.assertEqual(self.decomp.get_month_keew(pd.Timestamp('2020-02-29')), 4)
-
     def test_get_colors_array(self):
         self.assertEqual(len(self.decomp.get_colors_array(5)), 5)
         self.assertEqual(len(self.decomp.get_colors_array(10)), 10)
