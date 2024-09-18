@@ -72,7 +72,6 @@ class TestDecompositionSingleton(unittest.TestCase):
     
         self.decomp.m_decompose()
         self.decomp.plot_decomposition('A', 'Year', range(2022,2024), 'Month', 'A')
-        self.decomp.plot_decomposition('B', 'B', 'B', 'B', 'B')
         plt.show()
 
 

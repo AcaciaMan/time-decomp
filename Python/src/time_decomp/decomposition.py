@@ -46,7 +46,7 @@ class DecompositionSingleton:
 
     def get_colors_array(self, n):
         # get n colors from a color map
-        return plt.cm.get_cmap('tab20', n).colors
+        return plt.get_cmap('tab20', n).colors
     
     def plot_decomposition(self, feature,  range_column, range_data, data_column, title, xlabel = None, ylabel = None):
 
