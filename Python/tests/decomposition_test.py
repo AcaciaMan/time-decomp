@@ -16,6 +16,24 @@ class TestDecompositionSingleton(unittest.TestCase):
         self.decomp = DecompositionSingleton()
 
         self.decomp.df = pd.DataFrame({'A': np.random.randint(0,100, size=(100,)), 'B': np.random.randint(0,100, size=(100,))})
+
+
+        lsYears = [2019]*100
+        lsMonths = [1]*50 + [2]*50
+
+        iYear = 2021
+        iMonth = 1
+        for i in range(100):
+            if iMonth > 12:
+                iYear += 1
+                iMonth = 1
+            lsYears[i] = iYear
+            lsMonths[i] = iMonth
+            iMonth += 1
+
+        self.decomp.df['Year'] = lsYears
+        self.decomp.df['Month'] = lsMonths    
+
         
         self.decomp.features = ['A', 'B']
         self.decomp.decompose_params = {'model': 'additive', 'period':12, 'extrapolate_trend':'freq'}
@@ -53,7 +71,7 @@ class TestDecompositionSingleton(unittest.TestCase):
 
     
         self.decomp.m_decompose()
-        self.decomp.plot_decomposition('A', 'A', range(10), 'A', 'A')
+        self.decomp.plot_decomposition('A', 'Year', range(2022,2024), 'Month', 'A')
         self.decomp.plot_decomposition('B', 'B', 'B', 'B', 'B')
         plt.show()
 
