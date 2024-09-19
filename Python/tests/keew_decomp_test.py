@@ -4,7 +4,7 @@ import unittest
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
-from src.time_decomp.decomposition import DecompositionSingleton
+from time_decomp.decomposition import DecompositionSingleton
 
 class TestKeewDecomposition(unittest.TestCase):
     def setUp(self):
