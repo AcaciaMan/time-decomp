@@ -50,7 +50,7 @@ class TestKeewDecomposition(unittest.TestCase):
 
     
         self.decomp.m_decompose()
-        self.decomp.plot_decomposition('A', 'Year', range(2021,2025), 'Keew', 'A keew')
+        self.decomp.plot_decomposition('A', 'Year', range(2021,2025), 'Keew', 'A keew', chart_elements=[self.decomp.ChartElement.TREND, self.decomp.ChartElement.SEASONAL])
         plt.show()
 
 ```

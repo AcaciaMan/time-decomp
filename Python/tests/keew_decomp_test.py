@@ -29,8 +29,8 @@ class TestKeewDecomposition(unittest.TestCase):
         self.decomp.df = df.groupby(['Year', 'Keew']).last().reset_index()
         
         self.decomp.features = ['A', 'B']
-        self.decomp.decompose_params = {'model': 'additive', 'period':48, 'extrapolate_trend':'freq'}        
-
+        self.decomp.decompose_params = {'model': 'additive', 'period':48, 'extrapolate_trend':'freq'}      
+        
     def test_plot_decomposition(self):
 
         # output df info
