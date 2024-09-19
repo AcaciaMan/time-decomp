@@ -2,6 +2,7 @@
 import pandas as pd
 import statsmodels.api as sm
 import matplotlib.pyplot as plt
+from enum import Enum
 
 class DecompositionSingleton:
     _instance = None
@@ -48,7 +49,13 @@ class DecompositionSingleton:
         # get n colors from a color map
         return plt.get_cmap('tab20', n).colors
     
-    def plot_decomposition(self, feature,  range_column, range_data, data_column, title, xlabel = None, ylabel = None):
+    class ChartElement(Enum):
+        OBSERVED = 'observed'
+        SEASONAL = 'seasonal'
+        TREND = 'trend'
+        RESID = 'resid'
+
+    def plot_decomposition(self, feature,  range_column, range_data, data_column, title, xlabel = None, ylabel = None, chart_elements = [ChartElement.SEASONAL, ChartElement.TREND]):
 
         if xlabel is None:
             xlabel = data_column
@@ -62,11 +69,13 @@ class DecompositionSingleton:
 
         # plot the first data of the range
         for i, n in enumerate(range_data):
-            if i == 0:
-                # get mean of the trend
-                n_trend = self.s[feature].trend[self.df[range_column] == n].mean()
-                plt.plot(self.df[self.df[range_column] == n][data_column], self.s[feature].seasonal[self.df[range_column] == n]+n_trend, color='red', linewidth=2, label='Seasonality')
-            plt.plot(self.df[self.df[range_column] == n][data_column], self.s[feature].trend[self.df[range_column] == n], color=colors[i], label=str(n))
+            if self.ChartElement.TREND in chart_elements:
+                if self.ChartElement.SEASONAL in chart_elements:
+                    if i == 0:
+                        # get mean of the trend
+                        n_trend = self.s[feature].trend[self.df[range_column] == n].mean()
+                        plt.plot(self.df[self.df[range_column] == n][data_column], self.s[feature].seasonal[self.df[range_column] == n]+n_trend, color='red', linewidth=2, label='Seasonality')
+                plt.plot(self.df[self.df[range_column] == n][data_column], self.s[feature].trend[self.df[range_column] == n], color=colors[i], label=str(n))
 
         font1 = {'family':'serif','color':'blue','size':32}
         font2 = {'family':'serif','color':'darkred','size':24}  
