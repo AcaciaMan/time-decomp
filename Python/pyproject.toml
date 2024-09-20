@@ -4,13 +4,12 @@ build-backend = "hatchling.build"
 
 [project]
 name = "time-decomp"
-version = "1.2.1"
+version = "1.2.2"
 authors = [
   { name="AcaciaMan", email="11488694+AcaciaMan@users.noreply.github.com" },
 ]
 description = "Time series decomposition plot trend and seasonality together"
 readme = "README.md"
-requires-python = ">=3.12"
 classifiers = [
     "Programming Language :: Python :: 3",
     "License :: OSI Approved :: Apache Software License",
