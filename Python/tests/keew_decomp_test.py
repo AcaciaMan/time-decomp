@@ -42,9 +42,8 @@ class TestKeewDecomposition(unittest.TestCase):
 
     
         self.decomp.m_decompose()
-        self.decomp.plot_decomposition('A', 'Year', range(2021,2025), 'Keew', 'A keew', chart_elements=[self.decomp.ChartElement.TREND, self.decomp.ChartElement.SEASONAL])
+        self.decomp.plot_decomposition('A', 'Year', range(2021,2025), 'Keew', 'A keew', chart_elements=[ self.decomp.ChartElement.OBSERVED])
         plt.show()
-
 
     def test_get_month_keew(self):
         self.assertEqual(self.decomp.get_month_keew(pd.Timestamp('2020-01-01')), 1)

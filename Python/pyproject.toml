@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "time-decomp"
-version = "1.1.0"
+version = "1.2.0"
 authors = [
   { name="AcaciaMan", email="11488694+AcaciaMan@users.noreply.github.com" },
 ]
