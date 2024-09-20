@@ -54,3 +54,13 @@ class TestKeewDecomposition(unittest.TestCase):
         plt.show()
 
 ```
+
+## Added PLOTLY to run from IPython Notebook
+
+```
+from plotly.offline import iplot
+
+decomp.m_decompose()
+fig = decomp.plot_decomposition_plotly('A', 'Year', range(2021,2025), 'Keew', 'A keew', chart_elements=[ decomp.ChartElement.OBSERVED, decomp.ChartElement.SEASONAL])
+iplot(fig)
+```
