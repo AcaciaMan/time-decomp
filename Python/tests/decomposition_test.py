@@ -8,9 +8,6 @@ from time_decomp.decomposition import DecompositionSingleton
 from statsmodels.tsa.seasonal import DecomposeResult
 
 
-# Configure logging
-print("Configuring logging")
-
 class TestDecompositionSingleton(unittest.TestCase):
     def setUp(self):
         self.decomp = DecompositionSingleton()
@@ -37,7 +34,6 @@ class TestDecompositionSingleton(unittest.TestCase):
         
         self.decomp.features = ['A', 'B']
         self.decomp.decompose_params = {'model': 'additive', 'period':12, 'extrapolate_trend':'freq'}
-        self.decomp.plot_params = {'title': 'Decomposition of feature', 'xlabel': 'Time', 'ylabel': 'Feature'}
 
     def test_m_decompose(self):
         self.decomp.m_decompose()

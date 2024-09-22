@@ -64,3 +64,48 @@ decomp.m_decompose()
 fig = decomp.plot_decomposition_plotly('A', 'Year', range(2021,2025), 'Keew', 'A keew', chart_elements=[ decomp.ChartElement.OBSERVED, decomp.ChartElement.SEASONAL])
 iplot(fig)
 ```
+
+## Added trends analysis from [EnvironmentalTrends](https://github.com/kurtvanness/EnvironmentalTrends)
+
+```
+from time_decomp.environmentaltrends import EnvironmentalTrends
+
+# Set pandas option to display all columns
+pd.set_option('display.max_columns', None)
+
+class TestEnvironmentalTrends(unittest.TestCase):
+
+    def setUp(self):
+        self.decomp = EnvironmentalTrends()
+        self.decomp.features = ['A']
+        self.decomp.trend_data_params = {'year_col':'Year', 'month_col':'Month' }
+        self.decomp.trends_params = {'seasons_per_year': 12, 'trend_lengths': [1], 'end_years': [2025]}
+
+    def test_m_trends(self):
+        self.decomp.m_trends()
+        # output df info
+        print("Starting test_plot_decomposition")
+        print("DataFrame Info:")
+        print(self.decomp.t['A'].info())
+        print("DataFrame Head:")
+        print("\n%s", self.decomp.t['A'].head())
+```
+
+```
+DataFrame Head:
+
+%s   Frequency  SeasonsPeryear  TrendLength TrendEnd           TrendPeriod  \
+0   Monthly              12            1     2025  Jul 2024 to Jun 2025   
+
+   ValueCount  Minimum  Median    Average  Maximum  YearsInPeriod  \
+0        12.0      5.0    48.0  50.333333     96.0            1.0   
+
+   SeasonsInPeriod  PercentOfYears  PercentOfSeasons  KW-pValue   Seasonality  \
+0             12.0           100.0             100.0   0.443263  Non-seasonal   
+
+  AppliedSeasonality  MK-S  MK-Variance  MK-pvalue  IncreasingLikelihood  \
+0       Non-seasonal   8.0   212.666667   0.631222             68.438909   
+
+      TrendDirection  SenSlope  LowerSlope  UpperSlope  
+0  Likely increasing      16.5      -384.0       544.8 
+```
