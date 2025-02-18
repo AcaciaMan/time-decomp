@@ -231,3 +231,9 @@ class DecompositionSingleton:
         fig.add_traces(lTraces)
 
         return fig
+
+    def plot_statsmodels(self, feature):
+        # plot the decomposition of a feature using statsmodels
+        fig = self.s[feature].plot()
+        return fig
+
