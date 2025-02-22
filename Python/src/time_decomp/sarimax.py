@@ -5,7 +5,6 @@ import pandas as pd
 class Sarimax:
     def __init__(self):
         self.data = None
-        self.period = 48
         self.fitted_model = None
         self.model = None
         self.sarimax_params = {}
