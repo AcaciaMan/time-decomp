@@ -3,6 +3,8 @@ Time series decomposition plot trend and seasonality
 
 Plot trend and seasonality together in one chart as described at [Business Days Time Series Weekly Trend and Seasonality](https://www.mdpi.com/2673-4591/5/1/26).
 
+[![PyPI Downloads](https://static.pepy.tech/badge/time-decomp/week)](https://pepy.tech/projects/time-decomp) [![PyPI Downloads](https://static.pepy.tech/badge/time-decomp/month)](https://pepy.tech/projects/time-decomp) [![PyPI Downloads](https://static.pepy.tech/badge/time-decomp)](https://pepy.tech/projects/time-decomp) 
+
 Added SARIMAX keew predictions (see sarimax_test.py test_plot_keew())
 
 ![Screenshot_sarimax](https://github.com/user-attachments/assets/82bc5dd1-116a-4862-ae76-e1bf38444325)
